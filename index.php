@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="uft-8">
-	<title>Shopping Cart</title>
-</head>
-<body>
+<?php
+	// Include the header
+   include 'templates/header.template.php';
+
+?>
 	
 	<h1>Products</h1>
 
@@ -21,16 +19,11 @@
 
 		// Lopp over the reslut
 		while( $row = $result->fetch_assoc() ){
-			// Present the data
-			echo '<ul>';
-			echo '<li>ID: '.$row['id'].'</li>';
-			echo '<li>Name: '.$row['name'].'</li>';
-			echo '<li>Description: '.$row['description'].'</li>';
-			echo '<li>Price: '.$row['price'].'</li>';
-			echo '<li>Stock: '.$row['stock'].'</li>';
-			echo '</ul>'; 
+			
+			// Include the product template
+			include 'templates/product.template.php';
 		}
+
+		include 'templates/footer.template.php'
 	?>
 
-</body>
-</html>
