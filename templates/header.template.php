@@ -6,4 +6,10 @@
 </head>
 <body>
 
-
+<?php
+	
+	// Show the contents of the cart
+    echo '<pre>'; 
+	print_r( $_SESSION['cart'] );
+	echo '</pre>';
+?>
