@@ -34,18 +34,40 @@
 		// Run the query
 		$result = $dbc->query( $sql );
  		
- 		//
+ 		//Validation goes here
+        //Extract the data
 		$result = $result->fetch_assoc();
-        
 
-     	// Add the item to the cart
-    	$_SESSION['cart'][] = [
-    		'id'=>$_POST['product-id'],
-    		'name'=>$_POST['name'],
-    		'description'=>$_POST['description'],
-    		'price' => $result['price'],
-    	];
+        $productFound = false;
+        
+        // Lopp over the cart and see if this product is already added
+        for ($i=0; $i < count($_SESSION['cart']); $i++) { 
+            // Get the Id of the product in the cart
+            $cartItemID = $_SESSION['cart'][$i]['id'];
+            // Get the ID of the product being added to the cart
+            $addItemID = $_POST['product-id'];
+            // If the two IDs match
+            if($cartItemID == $addItemID){
+
+                $_SESSION['cart'][$i]['quantity'] += $_POST['quantity'];
+                $productFound = true;
+            }
+        }
+
+        // If the product was NOT found in the cart
+        if( $productFound == false ) {
+            // Add the item to the cart
+        $_SESSION['cart'][] = [
+            'id'=>$_POST['product-id'],
+            'name'=>$_POST['name'],
+            'description'=>$_POST['description'],
+            'price' => $result['price'],
+            'quantity' => $_POST['quantity'],
+        ];
     }
+  }
+
+     	
 
 	// Include the header
    include 'templates/header.template.php';
@@ -63,7 +85,7 @@
 		// Run the query
 		$result = $dbc->query( $sql );
 
-		// Lopp over the reslut
+		// Loop over the reslut
 		while( $row = $result->fetch_assoc() ){
 			
 			// Include the product template
