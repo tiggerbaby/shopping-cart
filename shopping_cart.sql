@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 02, 2016 at 03:22 am
+-- Generation Time: Feb 03, 2016 at 04:21 am
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `ordered_products` (
   `order` mediumint(8) unsigned NOT NULL,
   `quantity` tinyint(4) NOT NULL,
   `priceAtPurchase` decimal(4,2) NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `ordered_products`
@@ -62,7 +62,17 @@ CREATE TABLE IF NOT EXISTS `ordered_products` (
 INSERT INTO `ordered_products` (`id`, `product`, `order`, `quantity`, `priceAtPurchase`) VALUES
 (1, 1, 2, 40, '3.80'),
 (2, 4, 2, 5, '2.90'),
-(3, 5, 2, 10, '10.00');
+(3, 5, 2, 10, '10.00'),
+(4, 1, 3, 40, '3.80'),
+(5, 4, 3, 25, '2.90'),
+(6, 5, 3, 10, '10.00'),
+(7, 1, 4, 2, '3.80'),
+(8, 3, 4, 8, '11.00'),
+(9, 1, 5, 22, '3.80'),
+(10, 1, 6, 5, '3.80'),
+(11, 3, 6, 6, '11.00'),
+(12, 1, 7, 5, '3.80'),
+(13, 3, 8, 10, '11.00');
 
 -- --------------------------------------------------------
 
@@ -77,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `street` varchar(60) NOT NULL,
   `phone` varchar(20) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `state` enum('refunded','approved','expired','insufficient funds','timeout','pedding') NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `state` enum('refunded','declined','approved','expired','timeout','pedding') NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `orders`
@@ -86,7 +96,13 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 INSERT INTO `orders` (`id`, `name`, `suburb`, `street`, `phone`, `email`, `state`) VALUES
 (1, 'Ac', 1, '5 street', '1234567', 'testinguse.aw@gmail.com', ''),
-(2, 'Ac', 33, '5 street', '123456789', 'ac@mail.com', '');
+(2, 'Ac', 33, '5 street', '123456789', 'ac@mail.com', ''),
+(3, 'AW', 33, '5 Jackson St', '123456789', '', 'approved'),
+(4, 'Aw', 3, '1 high street', '', '', ''),
+(5, 'aw', 3, '11 st', '', '', ''),
+(6, 'Banana', 33, '1 street', '', '', ''),
+(7, 'WE', 18, '1 street', '', '', 'timeout'),
+(8, 'AE', 56, '10 high street', '', '', 'declined');
 
 -- --------------------------------------------------------
 
@@ -245,12 +261,12 @@ MODIFY `cityID` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `ordered_products`
 --
 ALTER TABLE `ordered_products`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `products`
 --

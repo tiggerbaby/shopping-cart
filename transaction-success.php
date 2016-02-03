@@ -18,12 +18,18 @@ $response = $pxpay->getResponse ( $_GET['result'] );
 if( $response->getSuccess() == 1){
 
 	// Update the database order to say paid
-	echo '<pre>';
-	print_r( $response );
-
+	$dbc = new mysqli('localhost','root','','shopping_cart');
+    
+   // Extract the order ID from the session
+    $orderID = $_SESSION['orderID'];
+    
+    $dbc->query("UPDATE orders SET state = 'approved' WHERE id = $orderID");
+    
 	// Email the client
 
 	// E-mail the website owner
 
 	// Clear the cart
+
+	$_SESSION['cart'] = [];
 }
